@@ -1,11 +1,18 @@
 from fastapi import FastAPI, HTTPException, Depends
-from sqlalchemy.org import Session # type: ignore
-from . import crud, models, schemas, database
+from sqlalchemy.orm import Session # type: ignore
+import crud
+import models
+import schemas
+import database
+import email_utils
 
 models.Base.metadata.create_all(bind=database.engine)
 
 app = FastAPI()
 
+@app.get("/")
+def read_root():
+    return {"Hello": "World"}
 @app.post("/register")
 def register(user: schemas.UserCreate, db: Session = Depends(database.get_db)):
     db_user = crud.get_user_by_email(db, email=user.email)
@@ -22,6 +29,13 @@ def login(user: schemas.UserLogin, db: Session = Depends(database.get_db)):
     if not otp:
         raise HTTPException(status_code=400, detail="OTP generation failed")
     return {"message": "OTP sent to your email", "otp": otp}
+
+@app.post("/send-otp/")
+async def send_otp_to_email(user_email: str, db: Session = Depends(database.get_db)):
+    otp = email_utils.generate_otp()  # Generate OTP
+    email_utils.send_otp_email(user_email, otp)  # Send OTP to the provided email
+    # Store OTP in the database or session (optional)
+    return {"message": "OTP sent to your email!"}
 
 @app.post("/verify_otp")
 def verify_otp(otp: schemas.OTP, db: Session = Depends(database.get_db)):
