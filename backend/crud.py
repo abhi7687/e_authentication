@@ -2,9 +2,9 @@ import pyotp
 import bcrypt
 from datetime import datetime, timedelta
 from sqlalchemy.orm import Session
-from .models import User
-from .schemas import UserCreate
-from .database import sessionLocal
+from models import User
+from schemas import UserCreate
+from database import sessionLocal
 
 def generate_otp():
     otp = pyotp.TOTP("base32secret3232").now()

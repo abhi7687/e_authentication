@@ -6,12 +6,12 @@ class UserCreate(BaseModel):
     password: str
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class UserLogin(BaseModel):
     email: str
     password: str
 
-class OTPVerify(BaseModel):
+class OTP(BaseModel):
     email: str
     otp: str
