@@ -1,0 +1,128 @@
+/* General reset for margin and padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f4f8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  
+  div {
+    background-color: #fff;
+    padding: 40px 60px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 450px;
+    text-align: center;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    opacity: 0;
+    animation: fadeIn 1s forwards;
+  }
+  
+  /* Fade in animation for the success message */
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  /* Heading (Success message) styling */
+  h2 {
+    font-size: 36px;
+    color: #27ae60; /* Green for success */
+    margin-bottom: 20px;
+    font-weight: 600;
+    animation: slideInFromTop 0.6s ease-out;
+  }
+  
+  /* Text animation for the heading */
+  @keyframes slideInFromTop {
+    0% {
+      transform: translateY(-30px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  /* Success message styling */
+  p {
+    font-size: 18px;
+    color: #555;
+    margin-top: 10px;
+    animation: slideInFromBottom 0.6s ease-out;
+  }
+  
+  /* Text animation for the paragraph */
+  @keyframes slideInFromBottom {
+    0% {
+      transform: translateY(30px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  /* Optional background element to add a celebratory feel */
+  div:before {
+    content: '🎉';
+    font-size: 50px;
+    display: block;
+    margin-bottom: 20px;
+    color: #3498db; /* Blue */
+    animation: bounceIn 1s ease-out;
+  }
+  
+  /* Bouncing effect for the celebratory icon */
+  @keyframes bounceIn {
+    0% {
+      transform: translateY(-10px);
+    }
+    50% {
+      transform: translateY(10px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+  
+  /* Add a subtle hover effect on the success box */
+  div:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Add responsiveness for smaller screen sizes */
+  @media (max-width: 480px) {
+    div {
+      padding: 30px 20px;
+      width: 100%;
+    }
+  
+    h2 {
+      font-size: 30px;
+    }
+  
+    p {
+      font-size: 16px;
+    }
+  }
+  
